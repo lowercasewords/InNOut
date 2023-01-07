@@ -3,9 +3,24 @@
 @{
     ViewData["Title"] = "Home page";
 }
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<style>
+    .button-wrapper {
+        display:inline-flex
+    }
+        .button-wrapper > a {
+            background-color: #6bc174;
+            line-height: 20vh;
+            width: 20vh;
+            margin: 0 5vw;
+            text-decoration: auto;
+            color: yellow;
+        }
+</style>
+<div class="button-wrapper">
+    <a id="in-button-link" asp-page-handler="">
+        IN
+    </a>
+    <a id="out-button-link" href="#">
+        OUT
+    </a>
 </div>
-

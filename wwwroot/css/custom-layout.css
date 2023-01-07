@@ -1,0 +1,13 @@
+﻿body {
+    background-color: #0d0722ed;
+    height: 94vh;
+}
+
+.border {
+    border-style: double;
+    border-color: #FFD700;
+    margin: 20px;
+    height: 100%;
+    text-align: center;
+}
+
