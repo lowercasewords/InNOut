@@ -26,7 +26,12 @@ namespace InNOut.Pages
 
         public void OnGet()
         {
-            
+            Console.WriteLine("Get was processed");
+        }
+
+        public void OnPost(string message_title, string message_content)
+        {
+            Console.WriteLine($"Title: {message_title}\nContent: {message_content}");
         }
     }
 }
