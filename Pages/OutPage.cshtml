@@ -1,0 +1,88 @@
+@page
+@model OutPageModel
+
+<link rel="stylesheet" href="wwwroot/css/site.css" />
+
+<style>
+    table.out-table {
+        border-color: green;
+        border-width: 5px;
+        border-style: solid;
+    }
+</style>
+
+<nav class="back-to-index">
+    <ol>
+    </ol>
+</nav>
+<main>
+    <div class="main-content">
+        <div>
+            <table class="out-table">
+            </table>
+        </div>
+        <div class="page-select">
+            <button action="GET" id="request-content">Page Debug</button>
+            <script>
+                let pages = @ViewData["PageNum"]
+
+                //Displays all the Out Messages to the table
+                    function DisplayMessages(data_set) {
+                    //Regex to split bunch of messages into an array
+                    let message_search = /.*?:.*?(?=\n)/g;
+                    //Splitting an individual out-message into its title
+                    let title_search = /.*(?=:)/
+                    //Splitting an individual out-message into its content
+                    let content_search = /(?<=:).*/
+
+                    //All the out-tables that will receive the out-messages
+                    let out_tables = document.getElementsByClassName("out-table")
+                    //The array of current out-messages to be put on the table
+                    let messages = data_set.match(message_search)
+
+                    //Supply each table
+                    for (let tablenum = 0; tablenum < out_tables.length; ++tablenum) {
+                        //Current table
+                        let dest_table = out_tables[tablenum]
+
+                        //Creates the out-message table with their titles and contents
+                        for (let i = 0; i < messages.length; ++i) {
+                            let row = document.createElement("tr");
+                            let title = document.createElement("td")
+                            let content = document.createElement("td")
+
+                            title.innerText = messages[i].match(title_search)
+                            content.innerText = messages[i].match(content_search)
+
+                            row.appendChild(title)
+                            row.appendChild(content)
+
+                            dest_table.appendChild(row)
+                        }
+                    }
+                }
+                //document.getElementById("request-content").addEventListener("click", function () {
+                let request = new XMLHttpRequest()
+
+                let url = new URL("https://localhost:7003/OutPage")
+
+                //Routing request to a specific razor handler
+                url.searchParams.append("handler", "Message")
+                url.searchParams.append("page", pages)
+
+                request.open("GET", url)
+
+                //Tracking the request state
+                request.onreadystatechange = function () {
+                    //If request was successful
+                    if (request.readyState == 4 && request.status == 200) {
+                        //Displaying the received text with out-messages to the client
+                        DisplayMessages(request.responseText)
+                    }
+                }
+
+                request.send()
+            </script>
+        </div>
+    </div>
+</main>

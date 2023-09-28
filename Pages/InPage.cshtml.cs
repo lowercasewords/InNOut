@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.IO;
 
 namespace InNOut.Pages
 {
 	public class InPageModel : PageModel
     {
         public readonly ILogger<InPageModel> _logger;
-
+        
         public ILogger<InPageModel> Logger
         {
             get
@@ -24,9 +20,14 @@ namespace InNOut.Pages
             _logger = logger;
         }
 
-        public void OnGet()
+        //Appends clients data to the database 
+        public void OnPost(string message_title, string message_content)
         {
-            
+            using (StreamWriter streamWriter = new StreamWriter("ContentStorage.txt", true))
+            {
+                streamWriter.WriteLine($"{message_title}:{message_content};");
+                streamWriter.Close();
+            }
         }
     }
 }
