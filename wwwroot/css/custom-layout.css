@@ -11,3 +11,8 @@
     text-align: center;
 }
 
+div.main-content {
+    background-color: yellow;
+    margin: auto;
+    width: 80%;
+}
