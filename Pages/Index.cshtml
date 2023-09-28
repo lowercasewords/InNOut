@@ -1,25 +1,46 @@
-﻿@page
+﻿@page 
 @{
     ViewData["Title"] = "Home page";
 }
 <style>
-    .button-wrapper {
-        display:inline-flex
+    nav {
+        background-color: green;
+        min-width: fit-content;
+        min-height: fit-content;
+        display: inline-block;
+        max-height: 20vh;
+        max-width: 20vw;
     }
-        .button-wrapper > a {
-            background-color: #6bc174;
-            line-height: 20vh;
-            width: 20vh;
-            margin: 0 5vw;
-            text-decoration: auto;
-            color: yellow;
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: inline-block;
         }
+
+            nav ul > li {
+                background-color: #6bc174;
+                line-height: 20vh;
+                width: 20vh;
+                margin: 0 5vw;
+                text-decoration: auto;
+                color: yellow;
+                float:left;
+            }
 </style>
-<div class="button-wrapper">
-    <a id="in-button-link" asp-page="InPage">
-        IN
-    </a>
-    <a id="out-button-link" href="#">
-        OUT
-    </a>
-</div>
+<div class="main-content"></div>
+<nav>
+    <ul>
+        <li>
+            <a id="in-button-link" asp-page="InPage">
+                IN
+            </a>
+        </li>
+        <li>
+            <a id="out-button-link" asp-page="OutPage">
+                OUT
+            </a>
+        </li>
+    </ul>
+</nav>
