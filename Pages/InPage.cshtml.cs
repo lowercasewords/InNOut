@@ -25,7 +25,6 @@ namespace InNOut.Pages
         {
             using (StreamWriter streamWriter = new StreamWriter("ContentStorage.txt", true))
             {
-                streamWriter.WriteLine($"{message_title}:{message_content};");
                 streamWriter.Close();
             }
         }
