@@ -12,7 +12,6 @@ namespace InNOut.Pages
         {
             using (StreamWriter streamWriter = new StreamWriter(IN_DESTINATION, true))
             {
-                streamWriter.WriteLine($"{message_title}:{message_content};");
                 streamWriter.Close();
             }
         }
