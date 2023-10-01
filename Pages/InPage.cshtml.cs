@@ -5,26 +5,13 @@ namespace InNOut.Pages
 {
 	public class InPageModel : PageModel
     {
-        public readonly ILogger<InPageModel> _logger;
-        
-        public ILogger<InPageModel> Logger
-        {
-            get
-            {
-                return _logger;
-            }
-        }
-
-        public InPageModel(ILogger<InPageModel> logger)
-        {
-            _logger = logger;
-        }
-
+        private static readonly string MESSAGE_URL = "MessageStorage.txt";
         //Appends clients data to the database 
         public void OnPost(string message_title, string message_content)
         {
-            using (StreamWriter streamWriter = new StreamWriter("ContentStorage.txt", true))
+            using (StreamWriter streamWriter = new StreamWriter(MESSAGE_URL, true))
             {
+                streamWriter.WriteLine($"{message_title}:{message_content};");
                 streamWriter.Close();
             }
         }
